@@ -6,4 +6,4 @@ After cloning the application on your local, run
 
 # Run Application
 
-### `nodemon`
+### `npm run start`

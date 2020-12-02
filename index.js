@@ -1,17 +1,21 @@
-const express = require('express')
+// Load Configs
+require('./configs')
+
 const cors = require('cors')
-const userController = require('./controllers/user')
+const express = require('express')
+const apiRoutes = require('./routes')
+const bodyParser = require('body-parser')
+
 const app = express()
 app.use(cors())
-const port = 8000
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/users', (req, res) => {
-  // Adding intential delay for loader to appear
-  setTimeout(function () {
-    res.send(userController.getUsers())
-  }, 2000)
-})
+const port = process.env.PORT || 8080
+
+// Use API routes in the App
+app.use('/', apiRoutes)
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`App listening on port ${port}!`)
 })
